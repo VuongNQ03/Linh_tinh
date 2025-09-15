@@ -1,0 +1,16 @@
+CI/CD: 5 quá trình: Code, build, test, deploy, product
+- Sec gate: qua cổng code - gặp lỗi - tạm dung
+- Testing
+  + Code: test source code (static công cụ: codeql semgrep) => output: dòng lỗi trong code
+  + Build: docker, kubernet,... - test SCA - quét dependency - có thư viện sử dung trong src code - version của thư viện, vuln, .. => đưa ra update || Test image, container 
+  + Test: Dynamic analysis testing - zap, burpsuit - do false nhiều, dyna thường bị bỏ qua || IAST - || DAST - || RAST - , Uniq test sec <=> pentest 
+  + Deploy: build thành sản phẩm, sign? - VD deploy docker - sử dung thư viện docker - test thư viện docker || signstore || code sign || Test infrastructure: test hệ thống, khi build hệ thống phải sử dụng ansible, terraform, viết những file yaml - cho tự động, chuẩn policy chưa ?
+  + Monitor: monitor sec (SIEM), monitor performace(RAM) - Grafana  
+
+Thư viện trong Build - Test thư viện trong source code - các thư viện mà hay dùng
+Thư viện deploy - Sign - Test thư viện ngoài luồn src code - thư viện môi trường
+
+ansible, terraform: 
+- Đều là quá trình triển khai automation, 
+- Ansible: server tự động, khi ra lệnh trên 1 ansible - server nối với ansible - đều thực thi lệnh đấy => Mục tiêu automation deploy || Đặc trưng: ansible đều phải ssh tất cả các server nó được connect tới, ssh không pass không key, ansible phải được kết nối với database đã có hardware (Cấu hình sẵn CPU, RAM,...), không được gắn IP public, nằm trong local, ssh bằng local 
+- Teraform - giống ansible, kết nối đến cloud (cloud chưa đươc cấu hình hardware)
